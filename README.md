@@ -2,8 +2,6 @@
 
 AI 驱动的企业新闻智能展示平台 —— 自动爬取、AI 分类摘要、精美展示、智能问答。
 
-**在线地址**: [http://82.156.232.19](http://82.156.232.19)
-
 ![技术栈](https://img.shields.io/badge/Node.js-22-339933?logo=node.js)
 ![前端](https://img.shields.io/badge/React-18-61DAFB?logo=react)
 ![后端](https://img.shields.io/badge/Fastify-5-000000?logo=fastify)
