@@ -54,9 +54,9 @@ async function main() {
   const buffer = fs.readFileSync(dbPath);
   const db = new SQL.Database(buffer);
 
-  // 查询没有封面图的文章
+  // 查询占位图/无图文章
   const rows = [];
-  const stmt = db.prepare("SELECT id, source_url, title FROM news WHERE cover_image IS NULL OR cover_image = ''");
+  const stmt = db.prepare("SELECT id, source_url, title FROM news WHERE cover_image LIKE '/images/news/%' OR cover_image = '' OR cover_image IS NULL");
   while (stmt.step()) {
     rows.push(stmt.getAsObject());
   }
