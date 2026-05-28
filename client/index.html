@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="软通动力新闻中心 - AI驱动的企业新闻智能展示平台" />
+  <title>软通动力新闻中心</title>
+
+  <!-- 设计系统 -->
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/base.css" />
+
+  <!-- DOMPurify (XSS防护) + Markdown 渲染 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.1.6/purify.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+  <!-- React CDN -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <style>
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    @keyframes typingDot {
+      0%, 80%, 100% { opacity: 0.3; transform: scale(0.8); }
+      40% { opacity: 1; transform: scale(1.1); }
+    }
+    @keyframes cardEnter {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    /* 隐藏横向滚动条 */
+    [style*="overflowX"]::-webkit-scrollbar { display: none; }
+    /* 输入框 focus 高亮 */
+    input:focus { border-color: var(--color-brand-500) !important; }
+    /* 聊天消息 Markdown 渲染 */
+    .chat-markdown p { margin: 0 0 0.5em; }
+    .chat-markdown p:last-child { margin-bottom: 0; }
+    .chat-markdown strong, .chat-markdown b { font-weight: 700; color: #fff; }
+    .chat-markdown em, .chat-markdown i { font-style: italic; }
+    .chat-markdown ul, .chat-markdown ol { margin: 0.4em 0; padding-left: 1.4em; }
+    .chat-markdown li { margin-bottom: 0.2em; }
+    .chat-markdown code { background: rgba(0,0,0,0.3); padding: 1px 5px; border-radius: 3px; font-size: 0.9em; font-family: var(--font-mono); }
+    .chat-markdown pre { background: rgba(0,0,0,0.3); padding: 8px 12px; border-radius: 6px; overflow-x: auto; margin: 0.5em 0; }
+    .chat-markdown pre code { background: none; padding: 0; }
+    .chat-markdown h1, .chat-markdown h2, .chat-markdown h3 { margin: 0.5em 0 0.3em; font-weight: 700; }
+    .chat-markdown h1 { font-size: 1.15em; } .chat-markdown h2 { font-size: 1.08em; } .chat-markdown h3 { font-size: 1em; }
+    .chat-markdown hr { border: none; border-top: 1px solid rgba(255,255,255,0.1); margin: 0.6em 0; }
+    .chat-markdown blockquote { border-left: 2px solid var(--color-brand-400); margin: 0.5em 0; padding-left: 0.8em; color: var(--text-secondary); }
+    .chat-markdown a { color: var(--color-brand-300); text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel" src="js/components/App.jsx"></script>
+</body>
+</html>

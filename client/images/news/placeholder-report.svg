@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="420" viewBox="0 0 800 420">
+  <defs>
+    <linearGradient id="g7" x1="0" y1="0" x2="800" y2="420">
+      <stop offset="0%" stop-color="#4a148c"/>
+      <stop offset="100%" stop-color="#0a1a2e"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="420" fill="url(#g7)"/>
+  <circle cx="700" cy="350" r="180" fill="rgba(255,255,255,0.03)"/>
+  <rect x="280" y="170" width="240" height="80" rx="8" fill="rgba(255,255,255,0.08)"/>
+  <text x="400" y="220" text-anchor="middle" font-family="Arial,sans-serif" font-size="22" fill="rgba(255,255,255,0.7)">📋 行业报告</text>
+</svg>

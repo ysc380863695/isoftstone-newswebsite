@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="420" viewBox="0 0 800 420">
+  <rect width="800" height="420" fill="#0a1a2e"/>
+  <rect width="800" height="420" fill="url(#g1)"/>
+  <defs>
+    <linearGradient id="g1" x1="0" y1="0" x2="800" y2="420">
+      <stop offset="0%" stop-color="#004B8D"/>
+      <stop offset="100%" stop-color="#0a1a2e"/>
+    </linearGradient>
+  </defs>
+  <circle cx="650" cy="100" r="200" fill="rgba(255,255,255,0.03)"/>
+  <circle cx="150" cy="320" r="120" fill="rgba(255,255,255,0.02)"/>
+  <rect x="280" y="170" width="240" height="80" rx="8" fill="rgba(255,255,255,0.08)"/>
+  <text x="400" y="220" text-anchor="middle" font-family="Arial,sans-serif" font-size="22" fill="rgba(255,255,255,0.7)">🏢 公司动态</text>
+</svg>

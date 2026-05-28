@@ -1,0 +1,157 @@
+/* ============================================
+   isoftstone-news 设计系统令牌
+   Pentagram配方 × Vercel科技感
+   ============================================ */
+
+:root {
+  /* ── 品牌色彩 ── */
+  --color-brand-50: #E6F0FA;
+  --color-brand-100: #B3D4F0;
+  --color-brand-200: #80B8E6;
+  --color-brand-300: #4D9CDC;
+  --color-brand-400: #1A80D2;
+  --color-brand-500: #004B8D;   /* 主品牌蓝 */
+  --color-brand-600: #003D73;
+  --color-brand-700: #002F59;
+  --color-brand-800: #00213F;
+  --color-brand-900: #001325;
+
+  /* ── 中性色 ── */
+  --color-neutral-0: #FFFFFF;
+  --color-neutral-50: #F5F5F5;
+  --color-neutral-100: #E8E8E8;
+  --color-neutral-200: #D1D1D1;
+  --color-neutral-300: #B0B0B0;
+  --color-neutral-400: #888888;
+  --color-neutral-500: #6D6D6D;
+  --color-neutral-600: #5D5D5D;
+  --color-neutral-700: #4A4A4A;
+  --color-neutral-800: #2A2A2A;
+  --color-neutral-900: #0A0A0A;
+  --color-neutral-950: #050505;
+
+  /* ── 强调色 ── */
+  --color-accent-50: #FFF0E8;
+  --color-accent-100: #FFD4BF;
+  --color-accent-200: #FFB896;
+  --color-accent-300: #FF9C6D;
+  --color-accent-400: #FF8044;
+  --color-accent-500: #FF6B35;  /* 主强调橙 */
+  --color-accent-600: #E55A24;
+  --color-accent-700: #CC4A15;
+  --color-accent-800: #993810;
+  --color-accent-900: #66260B;
+
+  /* ── 语义色 ── */
+  --color-success: #22C55E;
+  --color-warning: #F59E0B;
+  --color-error: #EF4444;
+  --color-info: #3B82F6;
+
+  /* ── 页面背景 & 文字 ── */
+  --bg-primary: #0A0A0A;
+  --bg-secondary: #111111;
+  --bg-surface: #1A1A1A;
+  --bg-elevated: #222222;
+  --bg-overlay: rgba(0, 0, 0, 0.7);
+
+  --text-primary: #FFFFFF;
+  --text-secondary: #A0A0A0;
+  --text-tertiary: #6D6D6D;
+  --text-inverse: #0A0A0A;
+
+  /* ── 间距 (8px 基准) ── */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+
+  /* ── 字体 ── */
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Noto Sans SC', 'PingFang SC',
+    'Microsoft YaHei', 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'PingFang SC',
+    'Microsoft YaHei', sans-serif;
+  --font-mono: 'SF Mono', 'Fira Code', 'Fira Mono', 'Roboto Mono', monospace;
+
+  /* ── 字号 ── */
+  --text-xs: 0.75rem;    /* 12px */
+  --text-sm: 0.875rem;   /* 14px */
+  --text-base: 1rem;     /* 16px */
+  --text-lg: 1.125rem;   /* 18px */
+  --text-xl: 1.25rem;    /* 20px */
+  --text-2xl: 1.5rem;    /* 24px */
+  --text-3xl: 1.875rem;  /* 30px */
+  --text-4xl: 2.25rem;   /* 36px */
+  --text-5xl: 3rem;      /* 48px */
+  --text-6xl: 3.75rem;   /* 60px */
+  --text-hero: clamp(2.5rem, 5vw, 4.5rem);
+
+  /* ── 字重 ── */
+  --font-normal: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+  --font-extrabold: 800;
+
+  /* ── 行高 ── */
+  --leading-tight: 1.25;
+  --leading-snug: 1.375;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.625;
+  --leading-loose: 2;
+
+  /* ── 圆角 ── */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
+  --radius-full: 9999px;
+
+  /* ── 阴影 ── */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.6);
+  --shadow-glow: 0 0 20px rgba(0, 75, 141, 0.3);
+  --shadow-accent-glow: 0 0 20px rgba(255, 107, 53, 0.3);
+
+  /* ── 动效 ── */
+  --duration-instant: 100ms;
+  --duration-fast: 200ms;
+  --duration-normal: 300ms;
+  --duration-slow: 500ms;
+  --duration-slower: 800ms;
+
+  --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+  /* ── Z-Index ── */
+  --z-base: 0;
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-overlay: 300;
+  --z-modal: 400;
+  --z-toast: 500;
+
+  /* ── 布局 ── */
+  --max-width: 1280px;
+  --max-width-lg: 1024px;
+  --max-width-sm: 640px;
+  --header-height: 64px;
+  --sidebar-width: 320px;
+
+  /* ── 断点（CSS 变量不可用于媒体查询，此处仅作文档） ── */
+  /* sm: 640px, md: 768px, lg: 1024px, xl: 1280px, 2xl: 1536px */
+}
