@@ -3,8 +3,10 @@ const { useState, useEffect, useCallback, useMemo, useRef } = React;
 /* ============================================
    API 层 — 对齐 api-contracts.md
    ============================================ */
+const BASE = '/ysc';
+
 async function fetchAPI(path, options = {}) {
-  const res = await fetch(path, options);
+  const res = await fetch(BASE + path, options);
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   return res.json();
 }
@@ -805,7 +807,7 @@ function ChatWidget() {
   const getWs = useCallback(() => {
     if (wsRef.current && wsRef.current.readyState === WebSocket.OPEN) return Promise.resolve(wsRef.current);
     const proto = location.protocol === 'https:' ? 'wss:' : 'ws:';
-    const ws = new WebSocket(`${proto}//${location.host}/api/chat`);
+    const ws = new WebSocket(`${proto}//${location.host}${BASE}/api/chat`);
     wsRef.current = ws;
     return new Promise((resolve, reject) => {
       const timeout = setTimeout(() => {
