@@ -44,7 +44,7 @@ function HeroSection({ heroNews }) {
 
   return (
     <section aria-label="精选新闻" style={{
-      position: 'relative', height: 'clamp(300px, 50vh, 500px)', overflow: 'hidden',
+      position: 'relative', height: 'clamp(364px, calc(50vh + 64px), 564px)', overflow: 'hidden',
     }}>
       <div style={{
         position: 'absolute', inset: 0,
