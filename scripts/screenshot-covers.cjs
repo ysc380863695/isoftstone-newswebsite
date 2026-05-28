@@ -46,9 +46,9 @@ async function main() {
   const buffer = fs.readFileSync(dbPath);
   const db = new SQL.Database(buffer);
 
-  // 查询使用占位图的文章 (需要截图替换)
+  // 查询需要截图的文章：非 http 封面（占位图/本地路径）或 logo/icon 类图片
   const rows = [];
-  const stmt = db.prepare("SELECT id, title, source_url, category FROM news WHERE cover_image LIKE '%placeholder%'");
+  const stmt = db.prepare("SELECT id, title, source_url, category FROM news WHERE cover_image NOT LIKE 'http%' OR cover_image LIKE '%logo%' OR cover_image LIKE '%icon%'");
   while (stmt.step()) rows.push(stmt.getAsObject());
   stmt.free();
 

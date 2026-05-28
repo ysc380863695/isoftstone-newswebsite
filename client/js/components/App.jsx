@@ -455,6 +455,24 @@ function HeroSection({ heroNews }) {
   if (heroNews.length === 0) return null;
   const hero = heroNews[current];
 
+  // Create a shorter, polished excerpt for the Hero (truncate at sentence boundary ~100 chars)
+  const text = hero.summary || '';
+  let heroExcerpt = text;
+  if (text.length > 100) {
+    const chunk = text.substring(0, 100);
+    const lastPeriod = Math.max(chunk.lastIndexOf('。'), chunk.lastIndexOf('！'), chunk.lastIndexOf('？'));
+    if (lastPeriod >= 40) {
+      heroExcerpt = chunk.substring(0, lastPeriod + 1);
+    } else {
+      const nextPeriod = text.indexOf('。', 100);
+      if (nextPeriod > 0 && nextPeriod < 150) {
+        heroExcerpt = text.substring(0, nextPeriod + 1);
+      } else {
+        heroExcerpt = chunk + '...';
+      }
+    }
+  }
+
   return (
     <section aria-label="精选新闻" style={{
       position: 'relative', height: 'clamp(300px, 50vh, 500px)', overflow: 'hidden',
@@ -485,12 +503,15 @@ function HeroSection({ heroNews }) {
         }}>{hero.category}</span>
         <h1 className="hero-title" style={{
           fontSize: 'var(--text-hero)', fontWeight: 800,
-          maxWidth: '800px', lineHeight: 1.15, marginBottom: 'var(--space-3)',
+          maxWidth: '800px', lineHeight: 1.15, marginBottom: 'var(--space-4)',
         }}>{hero.title}</h1>
-        <p className="hero-summary" style={{
-          fontSize: 'var(--text-lg)', color: 'var(--text-secondary)',
-          maxWidth: '600px', lineHeight: 'var(--leading-relaxed)',
-        }}>{hero.summary}</p>
+        {heroExcerpt && (
+          <p className="hero-summary" style={{
+            fontSize: 'var(--text-base)', color: 'var(--text-secondary)',
+            maxWidth: '560px', lineHeight: 'var(--leading-relaxed)',
+            opacity: 0.85,
+          }}>{heroExcerpt}</p>
+        )}
         <div style={{ display: 'flex', gap: 'var(--space-2)', marginTop: 'var(--space-6)' }}>
           {heroNews.map((_, i) => (
             <button key={i} onClick={() => setCurrent(i)}
@@ -1038,12 +1059,20 @@ function App() {
   const [selectedNewsId, setSelectedNewsId] = useState(null);
   const [categories, setCategories] = useState([]);
   const [detailData, setDetailData] = useState(null);
+  const [heroNews, setHeroNews] = useState([]);
 
   // 加载分类
   useEffect(() => {
     fetchAPI('/api/categories')
       .then(cats => setCategories(cats.map(c => c.name)))
       .catch(() => {});
+  }, []);
+
+  // 加载固定 Hero 文章
+  useEffect(() => {
+    const heroIds = [71, 118, 141];
+    Promise.all(heroIds.map(id => fetchAPI('/api/news/' + id).catch(() => null)))
+      .then(results => setHeroNews(results.filter(Boolean)));
   }, []);
 
   // 真实 API 请求新闻列表
@@ -1091,13 +1120,11 @@ function App() {
     setSelectedNewsId(id);
   }, []);
 
-  // Hero 取前3条
-  const heroNews = response.data.slice(0, 3);
-
+  // Hero 使用固定精选文章
   return (
     <div id="app-root">
       <Header filters={filters} updateFilter={updateFilter} categories={categories} />
-      <HeroSection heroNews={heroNews} />
+      {heroNews.length > 0 && <HeroSection heroNews={heroNews} />}
       <NewsGrid
         response={response}
         loading={loading}

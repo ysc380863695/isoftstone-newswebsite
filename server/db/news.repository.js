@@ -41,12 +41,12 @@ export function listNews({ category, page = 1, pageSize = 20, range = '3650d', k
   // 总数
   const { count } = queryOne(`SELECT COUNT(*) as count FROM news WHERE ${where}`, params);
 
-  // 分页数据
+  // 分页数据：网站图片(9篇)优先，截图(14篇)在后，组内按日期倒序
   const offset = (page - 1) * pageSize;
   const rows = queryAll(
     `SELECT id, title, summary, category, source, source_url, publish_date, cover_image, tags, key_entities
      FROM news WHERE ${where}
-     ORDER BY publish_date DESC, id DESC
+     ORDER BY CASE WHEN cover_image LIKE 'http%' THEN 0 ELSE 1 END, publish_date DESC, id DESC
      LIMIT ? OFFSET ?`,
     [...params, pageSize, offset]
   );
@@ -274,10 +274,39 @@ function formatNewsRow(row) {
 function formatNewsDetail(row) {
   return {
     ...formatNewsRow(row),
-    content: row.content,
+    content: contentToHtml(row.content),
     sentiment: row.sentiment,
     relatedNews: [],
   };
+}
+
+/**
+ * Convert plain text content to HTML paragraphs.
+ * Content may have \n\n or \n as paragraph separators.
+ * Also filters out obvious garbage lines (CSS, JS, share links).
+ */
+function contentToHtml(text) {
+  if (!text) return '';
+
+  // Normalize line endings and collapse multiple blank lines
+  let cleaned = text.replace(/\r\n/g, '\n').replace(/\n{3,}/g, '\n\n');
+
+  // Split into paragraphs
+  const paragraphs = cleaned
+    .split('\n')
+    .map(p => p.trim())
+    .filter(p => {
+      if (!p) return false;
+      // Filter CSS/JS garbage lines
+      if (/^[.{]/.test(p) && /[{};]/.test(p)) return false;
+      if (/^(var |function |\.dynamic-|@media|}\s*$)/.test(p)) return false;
+      if (/^(分享到|打开手机|var |const |let )/.test(p) && p.length < 60) return false;
+      return true;
+    });
+
+  if (paragraphs.length === 0) return '';
+
+  return '<p>' + paragraphs.join('</p>\n<p>') + '</p>';
 }
 
 function safeParseJSON(str, fallback) {
