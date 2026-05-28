@@ -56,11 +56,26 @@ export function closeDb() {
 }
 
 export function saveDb() {
-  if (db && dbPath) {
+  if (!db || !dbPath) return;
+  try {
     const data = db.export();
     const buffer = Buffer.from(data);
-    fs.writeFileSync(dbPath, buffer);
+    const tmpPath = dbPath + '.tmp';
+    fs.writeFileSync(tmpPath, buffer);
+    fs.renameSync(tmpPath, dbPath);
+  } catch (err) {
+    console.error('[DB] Failed to save database:', err.message);
+    // 不 rethrow — 服务继续运行，用内存中的数据库
   }
+}
+
+/**
+ * 测试辅助：注入内存数据库，禁用定时保存和磁盘写入
+ */
+export function __setDb(newDb) {
+  db = newDb;
+  dbPath = null;
+  if (saveTimer) { clearInterval(saveTimer); saveTimer = null; }
 }
 
 // 标记脏位，由定时器统一保存
